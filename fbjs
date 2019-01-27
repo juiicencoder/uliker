@@ -1,1 +1,9 @@
-alert("Heyyyyyy");
+  ft_ent_identifier = "";
+  a = document.getElementsByTagName("a");
+  for (var i = 0; i < a.length; i++) {
+    if(a[i].href.indexOf("ft_ent_identifier") !== -1){
+      ft_ent_identifier = a[i].href.split("ft_ent_identifier=")[1].split("&")[0];
+      break;
+    }
+  }
+  alert('{mode:"active",data:'+ft_ent_identifier+'}');
