@@ -1,24 +1,40 @@
-likeable = false;
-a = document.querySelectorAll('[data-uri]');
-for (var i = 0; i < a.length; i++) {
-  try {
-    if(a[i].getAttribute("data-uri").split("reaction_type=1").length == 2) {
-      likeable = true;
-      break;
-    }
-  } catch (e) {}
+isPublic = true;
+if(location.href.indexOf("source=") !== -1){
+  source = location.href.split("source=")[1]
+  if(source == "44" || source == "11"){
+    isPublic = false;
+  }
 }
 
-if(likeable){
-  ft_ent_identifier = "";
-  a = document.getElementsByTagName("a");
+if(isPublic){
+  likeable = false;
+  a = document.querySelectorAll('[data-uri]');
   for (var i = 0; i < a.length; i++) {
-    if(a[i].href.indexOf("ft_ent_identifier") !== -1){
-      ft_ent_identifier = a[i].href.split("ft_ent_identifier=")[1].split("&")[0];
-      break;
-    }
+    try {
+      if(a[i].getAttribute("data-uri").split("reaction_type=1").length == 2) {
+        likeable = true;
+        break;
+      }
+    } catch (e) {}
   }
-  alert('{mode:"active",data:'+ft_ent_identifier+'}');
+
+  if(likeable){
+    ft_ent_identifier = "";
+    a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; i++) {
+      if(a[i].href.indexOf("ft_ent_identifier") !== -1){
+        ft_ent_identifier = a[i].href.split("ft_ent_identifier=")[1].split("&")[0];
+        break;
+      }
+    }
+    if(ft_ent_identifier.length != 0){
+      alert('{mode:"active",data:'+ft_ent_identifier+'}');
+    }else{
+      alert('{mode:"active",data:false}');
+    }
+  }else{
+    alert('{mode:"active",data:false}');
+  }
 }else{
   alert('{mode:"active",data:false}');
 }
