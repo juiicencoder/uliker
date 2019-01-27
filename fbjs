@@ -20,5 +20,5 @@ if(likeable){
   }
   alert('{mode:"active",data:'+ft_ent_identifier+'}');
 }else{
-  alert('{mode:"active",data:0}');
+  alert('{mode:"active",data:"0"}');
 }
